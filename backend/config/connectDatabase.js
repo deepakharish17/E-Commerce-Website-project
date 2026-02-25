@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 
 const connectDatabase = () => {
-    mongoose.connect(process.env.DB_URL).then((con) => {
-        console.log('MongoDB connected to host: '+con.connection.host)
+    mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("MongoDB connected");
     })
-};
+    .catch(err => {
+        console.log(err);
+        process.exit(1);
+    });
+}
 
 module.exports = connectDatabase;
